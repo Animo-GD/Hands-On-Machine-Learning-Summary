@@ -1,4 +1,4 @@
-# Chapter 2
+d# Chapter 2
 
 **First Step**: Frame The Problem.
 
@@ -48,5 +48,7 @@ many data transformations to apply.
 | **Sensitive to Outliers**    | More sensitive to outliers due to squaring of differences                                   | Less sensitive to outliers due to linear summation                                          |
 | **Use Cases**                | Physical distances, Euclidean spaces, clustering (like K-means), nearest neighbor searches. | Grid-based problems, certain clustering methods, robust to outliers.                        |
 | **Examples**                 | Measuring the distance between two points in a plane.                                       | Calculating the distance between two points in a city grid (taxicab geometry).              |
+
+
 
 
