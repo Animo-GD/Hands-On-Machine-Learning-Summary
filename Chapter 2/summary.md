@@ -37,8 +37,6 @@ many data transformations to apply.
 
 ![Difference between Manhattan distance and Euclidean distance - Basics of  control engineering, this and that](https://taketake2.com/ne1615_en.png)
 
-
-
 | Feature                      | Euclidean Distance                                                                          | Manhattan Distance                                                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | **Definition**               | The straight-line distance between two points.                                              | The sum of the absolute differences between coordinates.                                    |
@@ -49,6 +47,28 @@ many data transformations to apply.
 | **Use Cases**                | Physical distances, Euclidean spaces, clustering (like K-means), nearest neighbor searches. | Grid-based problems, certain clustering methods, robust to outliers.                        |
 | **Examples**                 | Measuring the distance between two points in a plane.                                       | Calculating the distance between two points in a city grid (taxicab geometry).              |
 
+The R2 score is a statistical measure that represents the proportion of the variance in the dependent variable that is predictable from the independent variables. It is also known as the coefficient of determination. The formula for R2 is:
 
+R2=1−SStot​SSres​​
+
+where:
+
+- SSres​ is the sum of the squared residuals (the differences between the observed and predicted values).
+- SStot​ is the total sum of squares (the differences between the observed values and the mean of the observed values).
+
+### Interpretation of R2 Score
+
+- R2=1: Perfect model; the predictions perfectly fit the actual data.
+- R2=0: The model does not explain any of the variance in the target variable; it is as good as using the mean value of the target variable for all predictions.
+- R2<0: The model performs worse than simply predicting the mean of the target variable. In this case, the sum of squared residuals is greater than the total sum of squares, indicating poor predictive performance.
+
+### Why R2 Can Be Negative
+
+An R2 score can be negative when the model's predictions are worse than a horizontal line representing the mean of the target variable. This can happen due to:
+
+1. **Overfitting**: The model is too complex and is capturing noise in the training data rather than the underlying trend.
+2. **Underfitting**: The model is too simple and fails to capture the underlying trend in the data.
+3. **Inappropriate Model**: The chosen model might not be suitable for the data.
+4. **Incorrect Feature Engineering**: Features used in the model might not be informative or might be poorly transformed.
 
 
