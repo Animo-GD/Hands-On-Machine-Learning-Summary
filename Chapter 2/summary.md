@@ -1,4 +1,4 @@
-d# Chapter 2
+# Chapter 2
 
 **First Step**: Frame The Problem.
 
@@ -70,5 +70,3 @@ An R2 score can be negative when the model's predictions are worse than a horizo
 2. **Underfitting**: The model is too simple and fails to capture the underlying trend in the data.
 3. **Inappropriate Model**: The chosen model might not be suitable for the data.
 4. **Incorrect Feature Engineering**: Features used in the model might not be informative or might be poorly transformed.
-
-
