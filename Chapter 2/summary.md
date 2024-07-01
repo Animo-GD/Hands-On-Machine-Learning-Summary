@@ -70,3 +70,154 @@ An R2 score can be negative when the model's predictions are worse than a horizo
 2. **Underfitting**: The model is too simple and fails to capture the underlying trend in the data.
 3. **Inappropriate Model**: The chosen model might not be suitable for the data.
 4. **Incorrect Feature Engineering**: Features used in the model might not be informative or might be poorly transformed.
+
+--------------
+
+# Correlation
+
+Correlation measures the relationship between two variables. It quantifies the degree to which two variables are related and the direction of that relationship. Here are some key points about correlation:
+
+### Types of Correlation
+
+1. **Positive Correlation**: Both variables move in the same direction. If one increases, the other also increases.
+2. **Negative Correlation**: Variables move in opposite directions. If one increases, the other decreases.
+3. **No Correlation**: No discernible relationship between the variables.
+
+### Types of Correlation Coefficients
+
+1. **Pearson Correlation Coefficient (r)**: Measures the linear relationship between two continuous variables. It ranges from -1 to 1.
+   
+   - \( $r$= 1 \): Perfect positive linear relationship.
+   - \( $r$ = -1 \): Perfect negative linear relationship.
+   - \( $r$ = 0 \): No linear relationship.
+
+2. **Spearman's Rank Correlation Coefficient (\(\rho\))**: Measures the monotonic relationship between two variables. It assesses how well the relationship between two variables can be described using a monotonic function.
+   
+   - \( $r$ = 1 \): Perfect positive monotonic relationship.
+   - \( $r$= -1 \): Perfect negative monotonic relationship.
+   - \( $r$= 0 \): No monotonic relationship.
+
+3. **Kendall's Tau (\(\tau\))**: Measures the ordinal association between two variables.
+
+### Calculating Pearson Correlation in Python
+
+Here's how you can calculate the Pearson correlation coefficient using Python's `pandas` and `numpy` libraries:
+
+#### Using `pandas`
+
+```python
+import pandas as pd
+
+# Creating a sample dataframe
+data = {'A': [1, 2, 3, 4, 5], 'B': [2, 4, 6, 8, 10], 'C': [5, 4, 3, 2, 1]}
+df = pd.DataFrame(data)
+
+# Calculating Pearson correlation matrix
+correlation_matrix = df.corr(method='pearson')
+print(correlation_matrix)
+```
+
+#### Using `numpy`
+
+```python
+import numpy as np
+
+# Creating sample data
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+
+# Calculating Pearson correlation coefficient
+correlation_coefficient = np.corrcoef(x, y)[0, 1]
+print(f"Pearson correlation coefficient: {correlation_coefficient}")
+```
+
+### Visualizing Correlation
+
+You can visualize the correlation between variables using a heatmap:
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Creating a sample dataframe
+data = {'A': [1, 2, 3, 4, 5], 'B': [2, 4, 6, 8, 10], 'C': [5, 4, 3, 2, 1]}
+df = pd.DataFrame(data)
+
+# Calculating the correlation matrix
+correlation_matrix = df.corr()
+
+# Plotting the heatmap
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.title('Correlation Matrix Heatmap')
+plt.show()
+```
+
+----------------
+
+![](/home/moaaz/snap/marktext/9/.config/marktext/images/2024-07-01-14-57-07-image.png)
+
+*Standard correlation coefficient of various datasets (source: Wikipedia;
+public domain image)*
+
+--------
+
+# Scikit-Learn Design
+
+Scikit-Learn’s API is remarkably well designed. These are the main design principles
+Consistency
+All objects share a consistent and simple interface:
+
+### Estimators
+
+Any object that can estimate some parameters based on a dataset is called
+an estimator (e.g., a SimpleImputer is an estimator). The estimation itself is
+performed by the `fit()`method, and it takes a dataset as a parameter, or two
+for supervised learning algorithms—the second dataset contains the labels.
+Any other parameter needed to guide the estimation process is considered a
+hyperparameter (such as a SimpleImputer’s strategy), and it must be set as
+an instance variable (generally via a constructor parameter).
+
+### Transformers
+
+Some estimators (such as a **SimpleImputer**) can also transform a dataset;
+these are called transformers. Once again, the API is simple: the transforma‐
+tion is performed by the `transform()` method with the dataset to transform
+as a parameter. It returns the transformed dataset. This transformation gen‐
+erally relies on the learned parameters, as is the case for a **SimpleImputer**.
+All transformers also have a convenience method called `fit_transform()`,
+which is equivalent to calling `fit()` and then `transform()` (but sometimes
+`fit_transform()` is optimized and runs much faster).
+
+### Predictors
+
+Finally, some estimators, given a dataset, are capable of making predictions;
+they are called predictors. For example, the **LinearRegression** model in
+the previous chapter was a predictor: given a country’s GDP per capita, it
+predicted life satisfaction. A predictor has a `predict()` method that takes a
+dataset of new instances and returns a dataset of corresponding predictions.
+It also has a `score()` method that measures the quality of the predictions,
+given a test set (and the corresponding labels, in the case of supervised
+learning algorithms).10
+
+### Inspection
+
+All the estimator’s **hyperparameters** are accessible directly via public instance
+variables (e.g., imputer.strategy), and all the estimator’s learned parameters
+are accessible via public instance variables with an underscore suffix (e.g.,
+imputer.statistics_).
+
+### Nonproliferation of classes
+
+Datasets are represented as **NumPy** arrays or **SciPy** sparse matrices, instead of
+homemade classes. Hyperparameters are just regular Python strings or numbers.
+
+### Composition
+
+Existing building blocks are reused as much as possible. For example, it is easy to
+create a Pipeline estimator from an arbitrary sequence of transformers followed
+by a final estimator.
+
+### Sensible defaults
+
+**Scikit-Learn** provides reasonable <mark>default values</mark> for most parameters, making it
+easy to quickly create a baseline working system.
