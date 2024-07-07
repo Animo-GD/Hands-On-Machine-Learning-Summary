@@ -551,3 +551,5 @@ print("Testing set shape:", X_test.shape, y_test.shape)
 
 - **Random Shuffling:** Always shuffle your data before splitting to ensure that the distribution of classes or patterns is consistent across training and testing sets.
 - **Stratification:** For classification tasks, consider using `stratify=y` in `train_test_split` to maintain the same class distribution in both training and testing sets.
+
+------------
