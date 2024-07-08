@@ -1,3 +1,6 @@
-Chapter 2/.ipynb_checkpoints
-/.jupyter/desktop-workspaces
-/.virtual_documents
+# Ignore all hidden files and directories
+.*
+
+# But don't ignore .gitignore and .git directories
+!.gitignore
+!.git/
