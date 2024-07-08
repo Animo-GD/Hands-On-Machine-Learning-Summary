@@ -1,8 +1,4 @@
-# Ignore all hidden files and directories
 .*
 **/.*
-# But don't ignore .gitignore and .git directories
 !.gitignore
 !.git/
-.ipynb_checkpoints/
-**/.ipynb_checkpoints/
